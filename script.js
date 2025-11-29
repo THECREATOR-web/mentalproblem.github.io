@@ -31,6 +31,8 @@ function updateMoodUI(val){
 
   moodEmoji.textContent = emoji;
   moodMessage.textContent = msg;
+  // expose current value for assistive tech
+  if(moodRange) moodRange.setAttribute('aria-valuenow', String(n));
 }
 
 moodRange.addEventListener('input', (e)=> updateMoodUI(e.target.value));
@@ -77,15 +79,57 @@ function stopBreathing(){
 startBreath.addEventListener('click', startBreathing);
 stopBreath.addEventListener('click', stopBreathing);
 
-// Resources modal
+// Resources modal with focus trap and restore
+let _previouslyFocused = null;
+let _modalKeyHandler = null;
+function _getFocusable(el){
+  return Array.from(el.querySelectorAll('a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'))
+    .filter(node => node.offsetWidth || node.offsetHeight || node.getClientRects().length);
+}
+
 function showModal(){
+  _previouslyFocused = document.activeElement;
+  const main = document.querySelector('main');
+  const header = document.querySelector('.site-header');
+  if(main) main.setAttribute('aria-hidden','true');
+  if(header) header.setAttribute('aria-hidden','true');
+
   resourcesModal.setAttribute('aria-hidden','false');
   resourcesModal.style.display = 'flex';
-  closeModal.focus();
+  resourcesModal.tabIndex = -1;
+  resourcesModal.focus();
+
+  // trap focus inside modal
+  const focusable = _getFocusable(resourcesModal);
+  const first = focusable[0];
+  const last = focusable[focusable.length - 1];
+  _modalKeyHandler = function(e){
+    if(e.key === 'Tab'){
+      if(e.shiftKey){
+        if(document.activeElement === first){ e.preventDefault(); last.focus(); }
+      } else {
+        if(document.activeElement === last){ e.preventDefault(); first.focus(); }
+      }
+    } else if(e.key === 'Escape'){
+      hideModal();
+    }
+  };
+  document.addEventListener('keydown', _modalKeyHandler);
 }
+
 function hideModal(){
+  const main = document.querySelector('main');
+  const header = document.querySelector('.site-header');
+  if(main) main.removeAttribute('aria-hidden');
+  if(header) header.removeAttribute('aria-hidden');
+
   resourcesModal.setAttribute('aria-hidden','true');
   resourcesModal.style.display = 'none';
+  resourcesModal.tabIndex = -1;
+  if(_modalKeyHandler) document.removeEventListener('keydown', _modalKeyHandler);
+  _modalKeyHandler = null;
+  if(_previouslyFocused && typeof _previouslyFocused.focus === 'function') _previouslyFocused.focus();
+  _previouslyFocused = null;
 }
 
 resourcesBtn.addEventListener('click', showModal);

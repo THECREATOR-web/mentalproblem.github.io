@@ -8,19 +8,20 @@
   <meta name="description" content="A playful, supportive page to notice how you feel, try a breathing exercise, and find resources." />
 </head>
 <body>
+  <a class="skip-link" href="#mainContent">Skip to main content</a>
   <div class="canvas" aria-hidden="true"></div>
 
   <header class="site-header">
     <div class="wrap">
       <h1 class="logo">🌱 MindGarden</h1>
       <nav aria-label="Main">
-        <button id="resourcesBtn" class="btn ghost">Resources</button>
-        <button id="toggleTheme" class="btn">Dark theme</button>
+        <button id="resourcesBtn" type="button" class="btn ghost">Resources</button>
+        <button id="toggleTheme" type="button" class="btn">Dark theme</button>
       </nav>
     </div>
   </header>
 
-  <main class="wrap main-grid">
+  <main id="mainContent" class="wrap main-grid">
     <section class="hero card" aria-labelledby="hero-title">
       <h2 id="hero-title">Welcome — check in with your mind</h2>
       <p class="lead">A playful corner to notice how you feel, try a quick breathing break, and find supportive resources.</p>
@@ -30,11 +31,11 @@
         <input id="moodRange" type="range" min="0" max="100" value="50" aria-valuemin="0" aria-valuemax="100" />
         <div class="mood-row">
           <span class="mood-emoji" id="moodEmoji" aria-hidden="true">😐</span>
-          <div id="moodMessage" class="mood-message">Thanks for checking in — it's okay to feel whatever you feel.</div>
+          <div id="moodMessage" class="mood-message" aria-live="polite">Thanks for checking in — it's okay to feel whatever you feel.</div>
         </div>
         <div class="save-row">
           <input id="journalInput" type="text" placeholder="Write a short note... (optional)" aria-label="Short journal note" />
-          <button id="saveBtn" class="btn">Save</button>
+          <button id="saveBtn" type="button" class="btn">Save</button>
         </div>
         <small id="savedNote" class="muted" aria-live="polite"></small>
       </div>
@@ -46,8 +47,8 @@
       <div class="breath-wrap">
         <div id="breathCircle" class="breath-circle" aria-hidden="true"></div>
         <div class="breath-controls">
-          <button id="startBreath" class="btn">Start</button>
-          <button id="stopBreath" class="btn ghost">Stop</button>
+          <button id="startBreath" type="button" class="btn">Start</button>
+          <button id="stopBreath" type="button" class="btn ghost">Stop</button>
         </div>
         <div id="breathHint" class="muted">Ready?</div>
       </div>
@@ -124,7 +125,7 @@
       </ul>
       <p class="muted">If you're outside the U.S., please contact local emergency services or search "<em>mental health crisis hotline</em>" with your country name.</p>
       <div class="modal-actions">
-        <button id="closeModal" class="btn">Close</button>
+        <button id="closeModal" type="button" class="btn">Close</button>
       </div>
     </div>
   </div>
