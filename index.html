@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MindGarden — playful space for mental wellness</title>
+  <link rel="stylesheet" href="styles.css" />
+  <meta name="description" content="A playful, supportive page to notice how you feel, try a breathing exercise, and find resources." />
+</head>
+<body>
+  <div class="canvas" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="wrap">
+      <h1 class="logo">🌱 MindGarden</h1>
+      <nav aria-label="Main">
+        <button id="resourcesBtn" class="btn ghost">Resources</button>
+        <button id="toggleTheme" class="btn">Dark theme</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap main-grid">
+    <section class="hero card" aria-labelledby="hero-title">
+      <h2 id="hero-title">Welcome — check in with your mind</h2>
+      <p class="lead">A playful corner to notice how you feel, try a quick breathing break, and find supportive resources.</p>
+
+      <div class="mood-panel" role="region" aria-labelledby="mood-label">
+        <label id="mood-label">How are you feeling right now?</label>
+        <input id="moodRange" type="range" min="0" max="100" value="50" aria-valuemin="0" aria-valuemax="100" />
+        <div class="mood-row">
+          <span class="mood-emoji" id="moodEmoji" aria-hidden="true">😐</span>
+          <div id="moodMessage" class="mood-message">Thanks for checking in — it's okay to feel whatever you feel.</div>
+        </div>
+        <div class="save-row">
+          <input id="journalInput" type="text" placeholder="Write a short note... (optional)" aria-label="Short journal note" />
+          <button id="saveBtn" class="btn">Save</button>
+        </div>
+        <small id="savedNote" class="muted" aria-live="polite"></small>
+      </div>
+    </section>
+
+    <section class="exercises card" aria-labelledby="ex-title">
+      <h3 id="ex-title">Try a breathing break</h3>
+      <p>Follow the circle and breathe with the guide. Tap Start to begin a 4‑4‑4 cycle.</p>
+      <div class="breath-wrap">
+        <div id="breathCircle" class="breath-circle" aria-hidden="true"></div>
+        <div class="breath-controls">
+          <button id="startBreath" class="btn">Start</button>
+          <button id="stopBreath" class="btn ghost">Stop</button>
+        </div>
+        <div id="breathHint" class="muted">Ready?</div>
+      </div>
+    </section>
+
+    <section class="cards card" aria-labelledby="topics-title">
+      <h3 id="topics-title">Common themes & symptoms</h3>
+      <div class="topic-grid" role="list">
+        <article class="topic" role="listitem" tabindex="0">
+          <div class="topic-emoji" aria-hidden="true">😰</div>
+          <h4>Anxiety</h4>
+          <p>Symptoms: restlessness, tense muscles, racing thoughts. Support: paced breathing, grounding (5 things you can see), tiny steps.</p>
+        </article>
+
+        <article class="topic" role="listitem" tabindex="0">
+          <div class="topic-emoji" aria-hidden="true">😱</div>
+          <h4>Panic attack</h4>
+          <p>Symptoms: sudden intense fear, chest tightness, heart racing, breathlessness, dizziness. Support: move to a safe place, slow deep breaths, name objects around you, remind yourself it will pass. Seek medical help if this is a first-time episode.</p>
+        </article>
+
+        <article class="topic" role="listitem" tabindex="0">
+          <div class="topic-emoji" aria-hidden="true">❤️</div>
+          <h4>Possible heart attack</h4>
+          <p>Symptoms: chest pain/pressure, pain spreading to jaw/arm/shoulder, shortness of breath, sweating, nausea. Emergency: this can be life‑threatening — call your local emergency number immediately (e.g., 911, or your country's emergency line).</p>
+        </article>
+
+        <article class="topic" role="listitem" tabindex="0">
+          <div class="topic-emoji" aria-hidden="true">⚡</div>
+          <h4>Epilepsy / seizure</h4>
+          <p>Symptoms: convulsions, stiffening, loss of awareness, sudden staring, unusual movements. First aid: keep the person safe, move objects away, cushion their head, time the seizure, don't put anything in their mouth. Call emergency services if the seizure lasts >5 minutes, repeats, or it's a first seizure.</p>
+        </article>
+
+        <article class="topic" role="listitem" tabindex="0">
+          <div class="topic-emoji" aria-hidden="true">🌀</div>
+          <h4>PTSD (Post‑Traumatic Stress)</h4>
+          <p>Symptoms: flashbacks, nightmares, avoidance, hypervigilance, strong emotional reactions. Support: grounding techniques, predictable routines, safe people, and professional help when needed.</p>
+        </article>
+
+        <article class="topic" role="listitem" tabindex="0">
+          <div class="topic-emoji" aria-hidden="true">😴</div>
+          <h4>Stress & sleep</h4>
+          <p>Symptoms: difficulty falling asleep, waking often, irritability. Support: wind-down routine, reduce screens before bed, short calming practices before sleep.</p>
+        </article>
+      </div>
+      <p class="small muted" style="margin-top:0.6rem">Note: These descriptions are supportive and for informational/demo use only — not a medical diagnosis. In emergencies call your local emergency services.</p>
+    </section>
+
+    <section class="card resources-preview" aria-labelledby="res-title">
+      <h3 id="res-title">Quick links & help</h3>
+      <ul>
+        <li><a href="https://www.mentalhealth.gov" target="_blank" rel="noopener">MentalHealth.gov</a></li>
+        <li><a href="https://www.nimh.nih.gov" target="_blank" rel="noopener">NIMH</a></li>
+        <li><a href="https://www.samhsa.gov/find-help" target="_blank" rel="noopener">Find local services (SAMHSA)</a></li>
+      </ul>
+      <p class="small muted">If you are in immediate danger, call your local emergency number. In the U.S., you can call or text 988 for crisis support.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <small>MindGarden — a playful supportive demo. Not a substitute for professional help.</small>
+    </div>
+  </footer>
+
+  <!-- Resources modal -->
+  <div id="resourcesModal" class="modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modalTitle">
+    <div class="modal-content">
+      <h2 id="modalTitle">Support & resources</h2>
+      <p>If you are struggling or in crisis, please reach out. The site offers links and a few exercises — it is not medical advice.</p>
+      <ul>
+        <li><a href="https://www.mentalhealth.gov/get-help" target="_blank" rel="noopener">Get help — MentalHealth.gov</a></li>
+        <li><a href="https://suicidepreventionlifeline.org" target="_blank" rel="noopener">U.S. Suicide & Crisis Lifeline (988)</a></li>
+        <li><a href="https://www.samhsa.gov/find-help/national-helpline" target="_blank" rel="noopener">SAMHSA National Helpline</a></li>
+      </ul>
+      <p class="muted">If you're outside the U.S., please contact local emergency services or search "<em>mental health crisis hotline</em>" with your country name.</p>
+      <div class="modal-actions">
+        <button id="closeModal" class="btn">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
