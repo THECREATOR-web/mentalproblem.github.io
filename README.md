@@ -1,3 +1,6 @@
+# mentalproblem.github.io
+an site where you can research mental problems
+
 # MindGarden — playful mental-wellness demo
 
 This is a single-page playful site with:
